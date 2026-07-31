@@ -1,5 +1,5 @@
-from config import NODE_CONSTRAINTS
-from node import StorageNode
+from app.simulator.config import NODE_CONSTRAINTS
+from app.simulator.node import StorageNode
 
 def is_node_eligible(node: StorageNode) -> bool:
 

@@ -1,8 +1,8 @@
-from config import FEATURE_WEIGHTS
-from config import  NODE_PROFILES
-from config import FEATURE_RANGES
+from app.simulator.config import FEATURE_WEIGHTS
+from app.simulator.config import  NODE_PROFILES
+from app.simulator.config import FEATURE_RANGES
 
-from node import StorageNode
+from app.simulator.node import StorageNode
 
 def normalize(
     value : float,

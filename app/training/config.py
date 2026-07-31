@@ -1,29 +1,8 @@
-EXPECTED_COLUMNS = [
-    "cluster_id",
-    "node_id",
-    "free_storage",
-    "cpu_usage",
-    "memory_usage",
-    "latency",
-    "bandwidth",
-    "reliability",
-    "failure_rate",
-    "current_load",
-    "expert_score",
-    "rank",
-]
+from pathlib import Path
 
-EXPECTED_DTYPES = {
-    "cluster_id": "int",
-    "node_id": "int",
-    "free_storage": "numeric",
-    "cpu_usage": "numeric",
-    "memory_usage": "numeric",
-    "latency": "numeric",
-    "bandwidth": "numeric",
-    "reliability": "numeric",
-    "failure_rate": "numeric",
-    "current_load": "numeric",
-    "expert_score": "numeric",
-    "rank": "int",
-}
+DATASET_PATH = (
+    Path(__file__).resolve()
+    .parent.parent
+    / "datasets"
+    / "training_dataset.csv"
+)

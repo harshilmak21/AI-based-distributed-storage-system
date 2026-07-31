@@ -1,6 +1,6 @@
 import random
-from node import StorageNode
-from config import NODE_PROFILES
+from app.simulator.node import StorageNode
+from app.simulator.config import NODE_PROFILES
 
 
 

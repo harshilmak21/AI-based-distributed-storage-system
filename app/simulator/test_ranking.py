@@ -1,5 +1,5 @@
-from cluster import generate_cluster
-from ranking import rank_nodes
+from app.simulator.cluster import generate_cluster
+from app.simulator.ranking import rank_nodes
 
 cluster = generate_cluster(20)
 

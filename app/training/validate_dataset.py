@@ -7,13 +7,7 @@ from pandas.api.types import (
     is_numeric_dtype
 )
 
-DATASET_PATH = (
-    Path(__file__).resolve()
-    .parent.parent
-    / "datasets"
-    / "training_dataset.csv"
-)
-
+from config import DATASET_PATH
 EXPECTED_COLUMNS = [
     "cluster_id",
     "node_id",
@@ -44,13 +38,9 @@ EXPECTED_DTYPES = {
     "rank": "int",
 }
 
+from data_loader import load_dataset
 
-def load_datasets(path : Path) -> pd.DataFrame :
 
-    if not path.exists():
-        raise FileNotFoundError(f"datasets not found : {path}")
-
-    return pd.read_csv(path)
 
 def print_summary(df : pd.DataFrame) -> None:
 
@@ -276,7 +266,7 @@ def validate_rank(df: pd.DataFrame) -> bool:
 
 
 def main():
-    df = load_datasets(DATASET_PATH)
+    df = load_dataset()
     print_summary(df)
     validate_columns(df)
     validate_data_types(df)
