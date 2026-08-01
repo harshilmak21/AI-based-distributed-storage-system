@@ -45,6 +45,7 @@ TEST_SIZE = 0.20
 
 RANDOM_STATE = 42
 
+# Random FOrest Configuration
 
 N_ESTIMATORS = 200
 

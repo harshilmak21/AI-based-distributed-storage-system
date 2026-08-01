@@ -7,6 +7,8 @@ from pandas.api.types import (
     is_numeric_dtype
 )
 from config import DATASET_PATH
+
+
 EXPECTED_COLUMNS = [
     "cluster_id",
     "node_id",
@@ -38,8 +40,6 @@ EXPECTED_DTYPES = {
 }
 
 from data_loader import load_dataset
-
-
 
 def print_summary(df : pd.DataFrame) -> None:
 
