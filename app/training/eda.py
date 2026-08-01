@@ -5,7 +5,7 @@ import pandas as pd
 import seaborn as sns
 
 from data_loader import load_dataset
-from config import EDA_DIR
+from config import EDA_DIR,FEATURE_COLUMNS
 
 
 class EDAAnalyzer:
@@ -102,6 +102,11 @@ class EDAAnalyzer:
             EDA_DIR / "target_correlations.csv"
         )
 
+        print("\nFeature-to-Feature Correlation")
+        print("=" * 60)
+        feature_corr = self.df[FEATURE_COLUMNS].corr()
+        print(feature_corr)
+
     def target_distribution(self):
         """Generate target histogram."""
 
@@ -150,7 +155,8 @@ def main():
     analyzer = EDAAnalyzer()
 
     analyzer.run()
-
+    print("\nFull Correlation Matrix")
+    print(analyzer.df.corr(numeric_only=True))
 
 if __name__ == "__main__":
     main()

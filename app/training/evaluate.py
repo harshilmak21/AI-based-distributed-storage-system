@@ -5,82 +5,62 @@ from sklearn.metrics import (
 )
 
 from random_forest_trainer import RandomForestTrainer
+from training_results import TrainingResult
 
-class ModelEvaluator :
+class ModelEvaluator:
+    """
+    Evaluate a trained regression model.
+    """
 
-    def __init__(self):
+    def __init__(self, training_result : TrainingResult) :
+        self.result = training_result
 
-        self.model= None
-        self.y_test = None
-        self.predictions = None
-        self.X_train = None
-        self.y_train = None
-
-        self.train_predictions = None
-
-    def load_model_outputs(self):
-
-        trainer = RandomForestTrainer()
-
-        (
-            self.model,
-            self.X_train,
-            self.X_test,
-            self.y_train,
-            self.y_test,
-            self.train_predictions,
-            self.predictions,
-        ) = trainer.run()
 
     def evaluate(self):
 
+
         mae = mean_absolute_error(
-            self.y_test,
-            self.predictions,
+            self.result.y_test,
+            self.result.test_predictions,
         )
 
         rmse = root_mean_squared_error(
-            self.y_test,
-            self.predictions,
-            
-        )
-
-        r2 = r2_score(
-            self.y_test,
-            self.predictions,
-        )
-
-        train_r2 = r2_score(
-            self.y_train,
-            self.train_predictions,
+            self.result.y_test,
+            self.result.test_predictions,
         )
 
         test_r2 = r2_score(
-            self.y_test,
-            self.predictions,
+            self.result.y_test,
+            self.result.test_predictions,
+        )
+
+        train_r2 = r2_score(
+            self.result.y_train,
+            self.result.train_predictions,
         )
 
         print("\n" + "=" * 60)
         print("MODEL EVALUATION")
         print("=" * 60)
 
-        print(f"MAE  : {mae:.6f}")
-        print(f"RMSE : {rmse:.6f}")
-        print(f"R²   : {r2:.6f}")
-        print(f"train_R²   : {train_r2:.6f}")
-        print(f"test_R²   : {test_r2:.6f}")
-
+        print(f"MAE        : {mae:.6f}")
+        print(f"RMSE       : {rmse:.6f}")
+        print(f"Train R²   : {train_r2:.6f}")
+        print(f"Test R²    : {test_r2:.6f}")
+        print(f"Gap        : {abs(train_r2-test_r2):.6f}")
 
     def run(self):
 
-        self.load_model_outputs()
         self.evaluate()
+
 
 def main():
 
-    evaluator = ModelEvaluator()
-    evaluator.run()
+    trainer = RandomForestTrainer()
+    TrainingResult = trainer.run()
+    evaluator = ModelEvaluator(TrainingResult)
+    evaluator.evaluate()
+
 
 if __name__ == "__main__":
-    main()
-
+    main()  

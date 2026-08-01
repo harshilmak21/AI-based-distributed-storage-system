@@ -1,5 +1,6 @@
 from abc import ABC,abstractmethod
 from preprocess import DataPreprocessor
+from training_results import TrainingResult
 
 class BaseTrainer(ABC):
 
@@ -57,7 +58,7 @@ class BaseTrainer(ABC):
 
         self.predict()
 
-        return (
+        return TrainingResult(
             self.model,
             self.X_train,
             self.X_test,
