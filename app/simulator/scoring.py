@@ -1,9 +1,9 @@
-from config import (
+from app.simulator.config import (
     FEATURE_RANGES,
     FEATURE_TYPES,
     FEATURE_WEIGHTS,
 )
-from node import StorageNode
+from app.simulator.node import StorageNode
 
 def normalize(
     value: float,

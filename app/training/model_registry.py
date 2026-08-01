@@ -1,7 +1,7 @@
 from pathlib import Path
 import joblib 
-from config import MODEL_DIR
-from training_results import TrainingResult
+from app.training.config import MODEL_DIR
+from app.training.training_results import TrainingResult
 
 class ModelRegistry:
 
