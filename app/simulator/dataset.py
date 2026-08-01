@@ -1,4 +1,4 @@
-from app.simulator.ranking import RanKedNode
+from ranking import RanKedNode
 
 def ranked_node_to_dict(
         cluster_id : int,
@@ -28,8 +28,8 @@ def ranked_node_to_dict(
         "rank": rank
     }
 
-from app.simulator.cluster import generate_cluster
-from app.simulator.ranking import rank_nodes
+from cluster import generate_cluster
+from ranking import rank_nodes
 
 def generate_cluster_rows(
         cluster_id : int ,

@@ -58,3 +58,14 @@ NODE_CONSTRAINTS = {
     "max_current_load": 90,      # %
     "max_failure_rate": 4.5      # %
 }
+
+FEATURE_TYPES = {
+    "free_storage": "benefit",
+    "cpu_usage": "cost",
+    "memory_usage": "cost",
+    "latency": "cost",
+    "bandwidth": "benefit",
+    "reliability": "benefit",
+    "failure_rate": "cost",
+    "current_load": "cost",
+}

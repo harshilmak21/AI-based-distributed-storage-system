@@ -1,0 +1,35 @@
+DATASET INFORMATION
+============================================================
+
+<class 'pandas.DataFrame'>
+RangeIndex: 760 entries, 0 to 759
+Data columns (total 12 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   cluster_id    760 non-null    int64  
+ 1   node_id       760 non-null    str    
+ 2   free_storage  760 non-null    float64
+ 3   cpu_usage     760 non-null    float64
+ 4   memory_usage  760 non-null    float64
+ 5   latency       760 non-null    float64
+ 6   bandwidth     760 non-null    float64
+ 7   reliability   760 non-null    float64
+ 8   failure_rate  760 non-null    float64
+ 9   current_load  760 non-null    float64
+ 10  expert_score  760 non-null    float64
+ 11  rank          760 non-null    int64  
+dtypes: float64(9), int64(2), str(1)
+memory usage: 71.4 KB
+
+
+DESCRIPTIVE STATISTICS
+============================================================
+       cluster_id  free_storage   cpu_usage  memory_usage     latency   bandwidth  reliability  failure_rate  current_load  expert_score        rank
+count  760.000000    760.000000  760.000000    760.000000  760.000000  760.000000   760.000000    760.000000    760.000000    760.000000  760.000000
+mean    50.497368    560.051475   39.355661     45.768325   25.575163  731.374968    97.979941      1.967001     39.892439      0.591359    4.417105
+std     28.760975    286.315308   24.989413     23.083463   17.993626  148.190893     1.250228      1.123290     25.535790      0.217457    2.363194
+min      1.000000    150.479410    5.026796     10.104050    5.028184  400.415176    95.000757      0.015256      5.038176      0.217768    1.000000
+25%     26.000000    232.872884   18.403210     26.553750   12.732424  622.874014    97.076322      1.153331     18.816694      0.406232    2.000000
+50%     50.000000    615.478161   29.651342     39.558782   18.385956  749.470316    98.255611      1.741067     30.234009      0.487556    4.000000
+75%     75.000000    825.716752   62.436073     65.860190   34.365456  845.984124    98.889430      2.820714     62.399651      0.825981    6.000000
+max    100.000000    999.112478   89.927068     89.685291   79.970825  999.629823    99.968092      4.478187     89.693752      0.936236   10.000000

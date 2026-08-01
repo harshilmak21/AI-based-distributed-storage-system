@@ -3,10 +3,9 @@ from pathlib import Path
 
 from pandas.api.types import (
     is_integer_dtype,
-    is_float_dtype,
+    is_string_dtype,
     is_numeric_dtype
 )
-
 from config import DATASET_PATH
 EXPECTED_COLUMNS = [
     "cluster_id",
@@ -25,7 +24,7 @@ EXPECTED_COLUMNS = [
 
 EXPECTED_DTYPES = {
     "cluster_id": "int",
-    "node_id": "int",
+    "node_id": "string",
     "free_storage": "numeric",
     "cpu_usage": "numeric",
     "memory_usage": "numeric",
@@ -96,6 +95,9 @@ def validate_data_types(df : pd.DataFrame) -> bool :
 
         elif expected_type == "numeric":
             valid = is_numeric_dtype(df[column])
+
+        elif expected_type == "string":
+            valid = is_string_dtype(df[column])
 
         else:
             valid = False
