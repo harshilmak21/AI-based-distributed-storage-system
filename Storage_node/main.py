@@ -1,4 +1,6 @@
-
+import httpx
+import psutil
+import shutil
 import os
 from pathlib import Path
 
@@ -82,3 +84,47 @@ def download_file(filename:str):
         filename = filename ,
         media_type = "application/octet-stream"
     )
+
+
+
+@app.get("/peer/{peer_id}/health")
+async def check_peer(peer_id: int):
+    if peer_id not in range(1, 6):
+        raise HTTPException(status_code=400, detail="Invalid peer ID")
+
+    if peer_id == int(NODE_ID.split("-")[-1]):
+        raise HTTPException(status_code=400, detail="Cannot check self")
+
+    peer_url = f"http://node{peer_id}:8000/health"
+
+    try:
+        async with httpx.AsyncClient(timeout=3.0) as client:
+            response = await client.get(peer_url)
+            response.raise_for_status()
+            return {
+                "requesting_node": NODE_ID,
+                "peer": response.json()
+            }
+    except httpx.HTTPError:
+        raise HTTPException(status_code=502, detail="Peer unavailable")
+
+
+
+@app.get("/metrics")
+def get_metrics():
+    disk = shutil.disk_usage(STORAGE_PATH)
+    cpu_usage = psutil.cpu_percent(interval=0.2)
+    memory_usage = psutil.virtual_memory().percent
+
+    return {
+        "node_id" : NODE_ID,
+        "free_storage" : disk.free / (1024**3),
+        "cpu_usage" : cpu_usage,
+        "memory_usage" : memory_usage,
+
+        "latency": 1.0,
+        "bandwidth": 100.0,
+        "reliability": 0.99,
+        "failure_rate": 0.01,
+        "current_load": 0.0
+    }
