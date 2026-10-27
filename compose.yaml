@@ -8,6 +8,7 @@ services: # lists the applications to run
     environment:
       NODE_ID: node-1
       STORAGE_PATH: /data
+      STORAGE_CAPACITY_GB : "1"
     volumes:
       - node1_data:/data
 
@@ -21,6 +22,7 @@ services: # lists the applications to run
     environment:
       NODE_ID: node-2
       STORAGE_PATH: /data
+      STORAGE_CAPACITY_GB : "1"
     volumes:
       - node2_data:/data
     ports:
@@ -33,6 +35,7 @@ services: # lists the applications to run
     environment:
       NODE_ID: node-3
       STORAGE_PATH: /data
+      STORAGE_CAPACITY_GB : "1"
     volumes:
       - node3_data:/data
     ports:
@@ -42,9 +45,11 @@ services: # lists the applications to run
   node4:
     image: storage-node:v2
     container_name: storage-node-4
+    
     environment:
       NODE_ID: node-4
       STORAGE_PATH: /data
+      STORAGE_CAPACITY_GB : "1"
     volumes:
       - node4_data:/data
     ports:
@@ -57,6 +62,7 @@ services: # lists the applications to run
     environment:
       NODE_ID: node-5
       STORAGE_PATH: /data
+      STORAGE_CAPACITY_GB : "1"
     volumes:
       - node5_data:/data
     ports:

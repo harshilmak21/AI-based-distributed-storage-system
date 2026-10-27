@@ -10,6 +10,8 @@ app = FastAPI()
 
 NODE_ID = os.getenv("NODE_ID", "node-1")
 STORAGE_PATH = Path(os.getenv("STORAGE_PATH", "/data"))
+STORAGE_CAPACITY_GB = float(os.getenv("STORAGE_CAPACITY_GB","1"))
+STORAGE_CAPACITY_BYTES = int(STORAGE_CAPACITY_GB * (1024 **3))
 STORAGE_PATH.mkdir(parents=True, exist_ok=True)
 
 
@@ -112,19 +114,32 @@ async def check_peer(peer_id: int):
 
 @app.get("/metrics")
 def get_metrics():
-    disk = shutil.disk_usage(STORAGE_PATH)
-    cpu_usage = psutil.cpu_percent(interval=0.2)
+    stored_bytes = get_stored_bytes()
+    free_bytes = max(0 , STORAGE_CAPACITY_BYTES - stored_bytes)
+
+    cpu_usage = psutil.cpu_percent(interval = 0.2)
     memory_usage = psutil.virtual_memory().percent
 
     return {
-        "node_id" : NODE_ID,
-        "free_storage" : disk.free / (1024**3),
-        "cpu_usage" : cpu_usage,
-        "memory_usage" : memory_usage,
-
+        "node_id": NODE_ID,
+        "free_storage": free_bytes / (1024 ** 3),
+        "cpu_usage": cpu_usage,
+        "memory_usage": memory_usage,
         "latency": 1.0,
         "bandwidth": 100.0,
         "reliability": 0.99,
         "failure_rate": 0.01,
-        "current_load": 0.0
+        "current_load": 0.0,
+        "stored_bytes": stored_bytes,
+        "capacity_bytes": STORAGE_CAPACITY_BYTES,
     }
+
+
+
+
+def get_stored_bytes():
+    return sum(
+        path.stat().st_size
+        for path in STORAGE_PATH.iterdir()
+        if path.is_file()
+    )
